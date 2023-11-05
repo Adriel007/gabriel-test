@@ -44,8 +44,7 @@ class Database
     }
     public function select($table, $fields = '*', $where = '1=1')
     {
-        $this->conn->exec('SELECT ' . $fields . ' FROM ' . $table . ' WHERE ' . $where);
-        return $this->conn->fetchAll(PDO::FETCH_ASSOC);
+        return $this->conn->query('SELECT ' . $fields . ' FROM ' . $table . ' WHERE ' . $where);
     }
 
 }

@@ -3,34 +3,40 @@
 header("Content-Type: application/json; charset=UTF-8");
 require '../Database.php';
 
-$db = new Database();
-$response = [];
+try {
+    $db = new Database();
+    $response = ['' => ''];
+    $postData = json_decode(file_get_contents("php://input"), true);
 
-// Check if the request method is POST
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Retrieve and sanitize user input (make sure to implement proper input validation and security measures)
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
-
-    // Perform user authentication (modify this based on your authentication logic)
-    $sql = "SELECT * FROM ADM WHERE email = :email";
-    $stmt = $db->connect()->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['password'])) {
-        // Successful authentication
-        $response['success'] = true;
-    } else {
-        // Failed authentication
-        $response['failure'] = 'Invalid email or password';
+    // Check if the required fields are set
+    if (!isset($postData["email"]) || !isset($postData["password"])) {
+        $response["failure"] = "Preencha todos os campos";
     }
-} else {
-    // Invalid request method
-    $response['failure'] = 'Invalid request method';
+    // Check if the request method is POST
+    else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $email = filter_var($postData['email'], FILTER_SANITIZE_EMAIL);
+        $password = htmlspecialchars($postData['password']);
+
+        $db->connect();
+
+        $results = $db->select('adm', '*', "email_ = '$email' AND password_ = '$password'");
+        if (count($results) > 0) {
+            session_start();
+            $_SESSION["username"] = $results[0]["username_"];
+            $response['success'] = true;
+        } else {
+            $response['failure'] = 'Email ou senha inválido';
+        }
+
+    } else {
+        // Invalid request method
+        $response['failure'] = 'Método de requisição inválido';
+    }
+
+    echo json_encode($response);
+    exit(0);
+} finally {
+    file_put_contents('log.json', json_encode(['error' => error_get_last()]));
 }
 
-echo json_encode($response);
-exit(0);
 ?>

@@ -26,7 +26,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = 'painel.html';
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logado com sucesso!',
+                    });
+                    setTimeout(() => {
+                        window.location.href = 'painel.html';
+                    }, 2000);
                 } else {
                     Swal.fire({
                         icon: 'error',
