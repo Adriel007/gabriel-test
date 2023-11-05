@@ -19,12 +19,22 @@ CREATE TABLE Pet (
     about_ TEXT,
     status_ ENUM('active', 'inactive') NOT NULL
 );
-
 insert into Pet
 (code_, name_, image_, sex_, species_, breed_, age_, weight_, size_, local_, about_, status_)
 values
 ("675092", "Bili", "bili.webp", "m", "Cachorro", "Yorkshire", 1, 2.2, "small", "Petz Casa Grande, Diadema - SP", "Filhotinho de yorkshire", "active"),
-("873012", "Tini", "tini.webp", "f", "Gato", "American Shorthair", 3, 5.0, "small", "Petz Bom Retiro, Curitiba - PR", "💖 Frajolinha Fêmea de narizinho rosa", "active");
+("873012", "Tini", "tini.webp", "f", "Gato", "American Shorthair", 3, 5.0, "small", "Petz Bom Retiro, Curitiba - PR", "💖 Frajolinha Fêmea de narizinho rosa", "active"),
+("309123", "Luna", "luna.webp", "f", "Cachorro", "Schnauzer", 4, 10.0, "small", "Petz Vila Gomes, São Paulo - SP", "Schnauzer", "active"),
+("129381", "Bird", "bird.webp", "m", "Gato", "Van turco", 3, 5.0, "small", "Petz Centro, Teresina - PI", "Gato", "active"),
+("675092", "Suzy", "suzy.webp", "f", "Gato", "American Shorthair", 2, 4.5, "small", "Petz Bom Retiro, Curitiba - PR", "American Shorthair", "active"),
+("675092", "Teco", "teco.webp", "m", "Gato", "Shorthair Europeu", 3, 6.5, "small", "Petz Centro, Teresina - PI", "Shorthair Europeu", "active"),
+("675092", "Bruce", "bruce.webp", "m", "Cachorro", "Bulldog", 6, 8.0, "small", "Petz Buritis, Belo Horizonte - MG", "Bulldog", "active"),
+("231032", "Maya", "maya.webp", "f", "Cachorro", "Shorthair Europeu", 2, 3.7, "small", "Petz Vila Joana, Jundiaí - SP", "", "active"),
+("412398", "Bela", "bela.webp", "f", "Cachorro", "Labrador", 3, 10.0, "medium", "Petz Guará I, Brasília - DF", "", "active"),
+("230131", "Gaia", "gaia.webp", "f", "Gato", "Persa", 7, 7.5, "small", "Petz Igrejinha, Capanema - PA", "Persa", "active"),
+("005612", "Koda", "koda.webp", "m", "Coelho", "Teddy Dwerg", 5, 2.5, "small", "Petz Centro, Teresina - PI", "", "active"),
+("093132", "Luke", "luke.webp", "m", "Cachorro", "Golden Retriever", 7, 15.0, "medium", "Petz Warta, Londrina - PR", "Golden Retriever", "active");
+
 
 -- Tabela de Adoção
 CREATE TABLE Adopt (
