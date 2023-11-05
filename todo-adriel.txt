@@ -1,0 +1,39 @@
+### PAINEL
+
+## AUTH PANEL
+# login
+# auth
+# pass-recuperation
+
+## ANIMALS REGISTER
+# CREATE (animals with NAME, SPECIE and AGE equals are not registred)
+# DELETE
+# UPDATE (animals with NAME, SPECIE and AGE equals are not registred)
+# SELECT (filters and pagination)
+# LIST FORMS ADOPTION (filter[form-date, requester-name, Animal-name], pagination, details in SWAL and csv-export button)
+
+## Animais (
+    ID * + auto,
+    name *,
+    image (<= 5) *,
+    specie (select) *,
+    breed (select, specie-children) *,
+    age *,
+    weight,
+    size(little/middle/big) *,
+    local *,
+    about,
+    status (active/inactive) *
+)
+
+## Adopt (
+    name *,
+    animal_id *,
+    cpf *,
+    email *,
+    cellphone *,
+    birth *,
+    date auto*
+)
+
+#########
