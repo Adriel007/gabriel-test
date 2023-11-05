@@ -98,5 +98,36 @@ INSERT INTO ADM (name_, email_, password_) VALUES
 ('admin2', 'admin2@example.com', 'senha2'),
 ('admin3', 'admin3@example.com', 'senha3');
 
+-- Generate 5 random pet records
+INSERT INTO Pet (code_, name_, image_, sex_, species_, breed_, age_, weight_, size_, local_, about_, status_)
+SELECT
+    FLOOR(100000 + RAND() * 900000) AS code_,
+    CONCAT('Pet', FLOOR(1 + RAND() * 100)) AS name_,
+    'pet_image.jpg' AS image_,
+    CASE WHEN RAND() < 0.5 THEN 'm' ELSE 'f' END AS sex_,
+    'Random Species' AS species_,
+    'Random Breed' AS breed_,
+    FLOOR(1 + RAND() * 10) AS age_,
+    ROUND(1 + RAND() * 10, 2) AS weight_,
+    CASE
+        WHEN RAND() < 0.3 THEN 'small'
+        WHEN RAND() < 0.6 THEN 'medium'
+        ELSE 'large'
+    END AS size_,
+    'Random Location' AS local_,
+    'Random Description' AS about_,
+    CASE WHEN RAND() < 0.8 THEN 'active' ELSE 'inactive' END AS status_
+FROM (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) AS random_data;
+
+-- Generate 5 random adoption records
+INSERT INTO Adopt (name_, animal_id_, cpf_, email_, cellphone_, birth_)
+SELECT
+    CONCAT('Adopter', FLOOR(1 + RAND() * 100)) AS name_,
+    FLOOR(1 + RAND() * 5) AS animal_id_,
+    LPAD(FLOOR(100000 + RAND() * 900000), 11, '0') AS cpf_,
+    CONCAT('adopter', FLOOR(1 + RAND() * 100), '@example.com') AS email_,
+    CONCAT('9', FLOOR(10 + RAND() * 90), FLOOR(100000000 + RAND() * 900000000)) AS cellphone_,
+    DATE_ADD('1970-01-01', INTERVAL FLOOR(RAND() * 365 * 40) DAY) AS birth_
+FROM (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5) AS random_data;
 
 select * from pet where 1=1;
