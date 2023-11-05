@@ -24,4 +24,28 @@ class Database
 
         return $this->conn;
     }
+    public function query($sql)
+    {
+        $this->conn->exec($sql);
+        return $this->conn->query($sql);
+    }
+    public function insert($table, $data)
+    {
+        $this->conn->exec('INSERT INTO ' . $table . ' SET ' . implode(', ', $data));
+        return $this->conn->lastInsertId();
+    }
+    public function update($table, $data, $where)
+    {
+        $this->conn->exec('UPDATE ' . $table . ' SET ' . implode(', ', $data) . ' WHERE ' . $where);
+    }
+    public function delete($table, $where)
+    {
+        $this->conn->exec('DELETE FROM ' . $table . ' WHERE ' . $where);
+    }
+    public function select($table, $fields = '*', $where = '1=1')
+    {
+        $this->conn->exec('SELECT ' . $fields . ' FROM ' . $table . ' WHERE ' . $where);
+        return $this->conn->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

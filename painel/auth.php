@@ -1,2 +1,0 @@
-<?php
-// Módulo de autenticação 
