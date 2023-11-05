@@ -18,8 +18,10 @@ try {
         $password = htmlspecialchars($postData['password']);
 
         $db->connect();
+        log_error_json($db);
 
         $results = $db->select('adm', '*', "email_ = '$email' AND password_ = '$password'");
+
         if (count($results) > 0) {
             session_start();
             $_SESSION["username"] = $results[0]["username_"];
@@ -35,8 +37,18 @@ try {
 
     echo json_encode($response);
     exit(0);
-} finally {
-    file_put_contents('log.json', json_encode(['error' => error_get_last()]));
+} catch (Exception $e) {
+    log_error_json($e);
+}
+
+function log_error_json($custom = "")
+{
+    file_put_contents('log.json', json_encode([
+        'last_error' => error_get_last(),
+        'json_last_error' => json_last_error(),
+        'json_last_error_msg' => json_last_error_msg(),
+        'custom' => $custom
+    ]));
 }
 
 ?>

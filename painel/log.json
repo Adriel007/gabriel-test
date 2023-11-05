@@ -1,1 +1,12 @@
-{"error":null}
+{
+    "last_error": null,
+    "json_last_error": 0,
+    "json_last_error_msg": "No error",
+    "custom": {
+        "errorInfo": [
+            "42S22",
+            1054,
+            "Unknown column 'email_' in 'where clause'"
+        ]
+    }
+}
