@@ -6,7 +6,7 @@ use dbgabriel;
 -- Tabela de Animais
 CREATE TABLE Pet (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    code_ INT NOT NULL,
+    code_ CHAR(6) NOT NULL,
     name_ VARCHAR(255) NOT NULL,
     image_ VARCHAR(255) NOT NULL,
     sex_ ENUM("m", "f") NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE Pet (
 insert into Pet
 (code_, name_, image_, sex_, species_, breed_, age_, weight_, size_, local_, about_, status_)
 values
-(675092, "Bili", "bili.webp", "m", "Cachorro", "Yorkshire", 1, 2.2, "small", "Petz Casa Grande, Diadema - SP", "Filhotinho de yorkshire", "active"),
-(873012, "Tini", "tini.webp", "f", "Gato", "American Shorthair", 3, 5.0, "small", "Petz Bom Retiro, Curitiba - PR", "💖 Frajolinha Fêmea de narizinho rosa", "active");
+("675092", "Bili", "bili.webp", "m", "Cachorro", "Yorkshire", 1, 2.2, "small", "Petz Casa Grande, Diadema - SP", "Filhotinho de yorkshire", "active"),
+("873012", "Tini", "tini.webp", "f", "Gato", "American Shorthair", 3, 5.0, "small", "Petz Bom Retiro, Curitiba - PR", "💖 Frajolinha Fêmea de narizinho rosa", "active");
 
 -- Tabela de Adoção
 CREATE TABLE Adopt (
@@ -97,3 +97,6 @@ INSERT INTO ADM (name_, email_, password_) VALUES
 ('admin1', 'admin1@example.com', 'senha1'),
 ('admin2', 'admin2@example.com', 'senha2'),
 ('admin3', 'admin3@example.com', 'senha3');
+
+
+select * from pet where 1=1;
