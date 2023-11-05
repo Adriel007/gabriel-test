@@ -18,9 +18,9 @@ try {
         $password = htmlspecialchars($postData['password']);
 
         $db->connect();
-        log_error_json($db);
 
         $results = $db->select('adm', '*', "email_ = '$email' AND password_ = '$password'");
+        log_error_json(var_export($results, true));
 
         if (count($results) > 0) {
             session_start();
