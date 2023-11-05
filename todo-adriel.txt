@@ -1,8 +1,8 @@
 ### PAINEL
 
 ## AUTH PANEL
-# login
-# auth
+# login X
+# auth X
 # pass-recuperation
 
 ## ANIMALS REGISTER

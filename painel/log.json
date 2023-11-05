@@ -1,6 +1,30 @@
 {
-    "last_error": null,
+    "last_error": {
+        "type": 2,
+        "message": "Undefined array key \"logout\"",
+        "file": "C:\\xampp\\htdocs\\gabriel-test\\painel\\painel.php",
+        "line": 9
+    },
     "json_last_error": 0,
     "json_last_error_msg": "No error",
-    "custom": "array (\n  0 => \n  array (\n    'ID' => 1,\n    'name_' => 'admin1',\n    'email_' => 'admin1@example.com',\n    'password_' => 'senha1',\n  ),\n)"
+    "custom": [
+        {
+            "ID": 1,
+            "name_": "admin1",
+            "email_": "admin1@example.com",
+            "password_": "senha1"
+        },
+        {
+            "ID": 2,
+            "name_": "admin2",
+            "email_": "admin2@example.com",
+            "password_": "senha2"
+        },
+        {
+            "ID": 3,
+            "name_": "admin3",
+            "email_": "admin3@example.com",
+            "password_": "senha3"
+        }
+    ]
 }

@@ -24,9 +24,6 @@ try {
 
         $db->connect();
 
-        $email = filter_var($postData['email'], FILTER_SANITIZE_EMAIL);
-        $password = $postData['password'];
-
         // Use prepared statements to prevent SQL injection
         $results = $db->select('adm', '*', "email_ = ? AND password_ = ?", [$email, $password]);
 
