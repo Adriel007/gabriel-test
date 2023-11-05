@@ -50,7 +50,7 @@
         <div class="container-fluid">
             <div class="row">
                 <aside style="width: 320px;">
-                    <form method="" class="bg-custom rounded p-3 text-uppercase pt-4 mt-2 position-sticky" style="top: 1rem;">
+                    <form method="get" action="quero-adotar.php" class="bg-custom rounded p-3 text-uppercase pt-4 mt-2 position-sticky" style="top: 1rem;">
                         <div class="mb-3 text-light bowlby-one">
                             Filtros
                         </div>
@@ -59,9 +59,11 @@
                             <label for="especie" class="text-capitalize text-light">Espécie</label>
                             <select name="especie" id="especie" class="form-control form-select">
                                 <option value="" selected disabled>Selecione</option>
-                                <option value="cachorro">Cachorro</option>
-                                <option value="coelho">Coelho</option>
-                                <option value="gato">Gato</option>
+                                <option value="Cachorro">Cachorro</option>
+                                <option value="Coelho">Coelho</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Passaro">Pássaro</option>
+                                <option value="Outro">Outro</option>
                             </select>
                         </div>
 
@@ -81,9 +83,9 @@
                             <label for="porte" class="text-capitalize text-light">Porte</label>
                             <select name="porte" id="porte" class="form-control form-select">
                                 <option value="" selected disabled>Selecione</option>
-                                <option value="pequeno">Pequeno</option>
-                                <option value="medio">Médio</option>
-                                <option value="grande">Grande</option>
+                                <option value="small">Pequeno</option>
+                                <option value="medium">Médio</option>
+                                <option value="large">Grande</option>
                             </select>
                         </div>
 
@@ -121,11 +123,11 @@
 
                         <?php include 'utils.php';
 
-                        mostrarTodos(select("pet"));
+                        mostrarTodos();
 
                         ?>
 
-                        <div class="col-xxl-3 col-4">
+                        <!-- <div class="col-xxl-3 col-4">
                             <div class="card rounded overflow-hidden">
                                 <a href="integra.php">
                                     <img src="img/bili.webp" alt="" class="w-100 object-fit-cover" height="320">
@@ -484,7 +486,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
                     </div>
 
                     <nav class="mt-5">

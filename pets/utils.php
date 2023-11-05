@@ -15,18 +15,20 @@
 </head>
 <body>
 
-<?php 
+<?php
+
+    // conexao com o banco
     $sn = "localhost"; $un = "root"; $pw = "root"; $db = "dbgabriel";
     $con = mysqli_connect($sn, $un, $pw, $db);
     if(mysqli_connect_errno()){ echo "erro"; exit(); }
 
-    
+    // SELECT no banco
     function select ($tabela, $valor="*", $where="1=1"){
         global $con;
     
         $resultado = []; 
         $n = 0;
-        $select = "SELECT $valor from $tabela where $where";
+        $select = $where == "" ? "SELECT $valor from $tabela" : "SELECT $valor from $tabela where $where";
     
         $result = mysqli_query($con, $select);
     
@@ -42,7 +44,54 @@
         return $resultado;
     }
 
-    function mostrarTodos ($arr){
+
+    // mostrar pets na pagina "quero-adotar.php" no formato correto, com ou sem filtros
+    function mostrarTodos(){
+
+        // verficando filtros
+
+        // todos os casos de negativa retornam "1=1" pois assim não interferem com os outros filtros
+        $species = 
+            isset($_GET['especie']) ? 
+            "species_ = '".$_GET['especie']."'"
+            : 
+            "1=1";
+
+        $breed = 
+            isset($_GET['raca']) ? 
+            "breed_ = '".$_GET['raca']."'"
+            : 
+            "1=1";
+
+        // no filtro de local, usasse-se a função "LIKE" para verificar se o texto escrito pelo usuário no filtro é fragmento de algum presente no banco
+        $local = 
+            isset($_GET['local']) && $_GET['local']!="" ? 
+            "local_ LIKE '%".$_GET["local"]."%'"
+            : 
+            "1=1";
+
+        $size = 
+            isset($_GET['porte']) ? 
+            "size_ = '".$_GET['porte']."'"
+            : 
+            "1=1";
+
+        $sex = 
+            isset($_GET['sexo']) ? 
+            "sex_ = '".$_GET['sexo']."'"
+            : 
+            "1=1";
+        
+        $arr = select("pet", "*", 
+        "
+            $species and
+            $breed and
+            $local and
+            $size and
+            $sex
+        ");
+
+        
 
         foreach ($arr as $pet) {
 
