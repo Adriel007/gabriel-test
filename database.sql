@@ -1,17 +1,30 @@
+-- drop database dbgabriel;
+
+create database dbgabriel;
+use dbgabriel;
+
 -- Tabela de Animais
-CREATE TABLE Animals (
+CREATE TABLE Pet (
     ID INT AUTO_INCREMENT PRIMARY KEY,
+    code_ CHAR(6) NOT NULL,
     name_ VARCHAR(255) NOT NULL,
     image_ VARCHAR(255) NOT NULL,
-    specie_ VARCHAR(255) NOT NULL,
+    sex_ ENUM("m", "f") NOT NULL,
+    species_ VARCHAR(255) NOT NULL,
     breed_ VARCHAR(255) NOT NULL,
     age_ INT NOT NULL,
     weight_ DECIMAL(5, 2),
-    size_ ENUM('little', 'middle', 'big') NOT NULL,
+    size_ ENUM('small', 'medium', 'large') NOT NULL,
     local_ VARCHAR(255) NOT NULL,
     about_ TEXT,
     status_ ENUM('active', 'inactive') NOT NULL
 );
+
+insert into Pet
+(code_, name_, image_, sex_, species_, breed_, age_, weight_, size_, local_, about_, status_)
+values
+("675092", "Bili", "bili.webp", "m", "Cachorro", "Yorkshire", 1, 2.2, "small", "Petz Casa Grande, Diadema - SP", "Filhotinho de yorkshire", "active"),
+("873012", "Tini", "tini.webp", "f", "Gato", "American Shorthair", 3, 5.0, "small", "Petz Bom Retiro, Curitiba - PR", "💖 Frajolinha Fêmea de narizinho rosa", "active");
 
 -- Tabela de Adoção
 CREATE TABLE Adopt (
@@ -29,7 +42,7 @@ CREATE TABLE Adopt (
 CREATE TABLE ADM (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     name_ VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email_ VARCHAR(255) NOT NULL,
     password_ VARCHAR(255) NOT NULL
 );
 
@@ -80,7 +93,10 @@ INSERT INTO Breeds (breed_name, species_id) VALUES
 ('Periquito', 4);
 
 -- Inserir alguns registros na tabela ADM
-INSERT INTO ADM (name_, email, password_) VALUES
+INSERT INTO ADM (name_, email_, password_) VALUES
 ('admin1', 'admin1@example.com', 'senha1'),
 ('admin2', 'admin2@example.com', 'senha2'),
 ('admin3', 'admin3@example.com', 'senha3');
+
+
+select * from pet where 1=1;
