@@ -12,7 +12,7 @@
                                 <div class="d-flex justify-content-center">
                                     <button type="button"
                                         class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        data-bs-toggle="modal" data-bs-target="anchor-$index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                             <path
@@ -46,11 +46,46 @@
                         </tr>
                 `;
 
-                const table = document.querySelector('#table tbody');
+                const htmlPopUp = `
+                <div class="modal fade" id="anchor-$index" tabindex="-1" aria-labelledby="label-$index" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered text-light">
+            <div class="modal-content bg-custom">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="label-$index">Usuário</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-wrap row-gap-4">
+                    <div class="col-6">
+                        <div><small>Usuário:</small></div>
+                        <div>$name</div>
+                    </div>
 
-                data.results.forEach(row =>
-                    table.innerHTML += html.replace('$user', row.user).replace('$email', row.email)
-                );
+                    <div class="col-6">
+                        <div><small>Status:</small></div>
+                        <div>$status</div>
+                    </div>
+
+                    <div class="col-6">
+                        <div><small>E-mail:</small></div>
+                        <div>$email</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+                const table = document.querySelector('#table tbody');
+                const modal = document.getElementById('modal');
+
+                data.results.forEach((row, index) => {
+                    table.innerHTML += html.replace('$user', row.user).replace('$email', row.email).replace('$index', index);
+                    //modal.innerHTML += htmlPopUp.replace('$index', index).replace('$name', row.name).replace('$status', row.status).replace('$email', row.email);
+                });
             }
         });
 })();

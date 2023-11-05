@@ -27,7 +27,9 @@ class Database
 
     public function query($sql)
     {
-        return $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function insert($table, $data)

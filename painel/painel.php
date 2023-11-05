@@ -12,12 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $response['success'] = true;
     } else if (isset($_GET['table'])) {
         $db->connect();
-        $results = $db->select('adopt', '*', "1=1", []);
+        $results = $db->query("SELECT pet.ID AS pet_id, adopt.name_ AS adopter_name, adopt.email_ AS adopter_email, adopt.animal_id_ AS animal_id, pet.status_ AS status_ FROM pet INNER JOIN adopt ON pet.ID = adopt.animal_id_;");
+
         $response["results"] = [];
         foreach ($results as $row) {
             array_push($response["results"], [
-                "user" => $row["name_"],
-                "email" => $row["email_"],
+                "user" => $row["adopter_name"],
+                "email" => $row["adopter_email"],
+                "status" => $row['status_'],
             ]);
         }
 
