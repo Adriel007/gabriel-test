@@ -4,12 +4,17 @@ header("Content-Type: application/json; charset=UTF-8");
 require '../Database.php';
 
 try {
+    session_start();
+
     $db = new Database();
     $response = ['' => ''];
     $postData = json_decode(file_get_contents("php://input"), true);
 
     // Check if the required fields are set
-    if (!isset($postData["email"]) || !isset($postData["password"])) {
+    if (
+        !isset($postData["email"]) || !isset($postData["password"])
+        || empty($postData["email"]) || empty($postData["password"])
+    ) {
         $response["failure"] = "Preencha todos os campos";
     }
     // Check if the request method is POST
@@ -19,12 +24,17 @@ try {
 
         $db->connect();
 
-        $results = $db->select('adm', '*', "email_ = '$email' AND password_ = '$password'");
-        log_error_json(var_export($results, true));
+        $email = filter_var($postData['email'], FILTER_SANITIZE_EMAIL);
+        $password = $postData['password'];
+
+        // Use prepared statements to prevent SQL injection
+        $results = $db->select('adm', '*', "email_ = ? AND password_ = ?", [$email, $password]);
 
         if (count($results) > 0) {
-            session_start();
-            $_SESSION["username"] = $results[0]["username_"];
+            $_SESSION["authorized"] = true;
+            $_SESSION["name"] = $results[0]["name_"];
+            $_SESSION["email"] = $results[0]["email_"];
+            $_SESSION["password"] = $results[0]["password_"];
             $response['success'] = true;
         } else {
             $response['failure'] = 'Email ou senha inválido';
@@ -39,16 +49,6 @@ try {
     exit(0);
 } catch (Exception $e) {
     log_error_json($e);
-}
-
-function log_error_json($custom = "")
-{
-    file_put_contents('log.json', json_encode([
-        'last_error' => error_get_last(),
-        'json_last_error' => json_last_error(),
-        'json_last_error_msg' => json_last_error_msg(),
-        'custom' => $custom
-    ]));
 }
 
 ?>

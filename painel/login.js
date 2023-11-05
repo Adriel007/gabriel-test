@@ -6,6 +6,16 @@
         submit: document.getElementById('submit')
     };
 
+    // Authentication
+    fetch('auth.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = 'painel.html';
+            }
+        });
+
+    // Login
     form.submit.onclick = () => {
         if (!form.email.value || !form.password.value) {
             Swal.fire({
@@ -32,7 +42,7 @@
                     });
                     setTimeout(() => {
                         window.location.href = 'painel.html';
-                    }, 2000);
+                    }, 5000);
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -47,7 +57,6 @@
                     title: 'Oops...',
                     text: 'Algo deu errado!'
                 });
-                console.error(error);
             })
     }
 })();

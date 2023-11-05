@@ -72,3 +72,14 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+// Função boa pra debuggar
+function log_error_json($custom = "")
+{
+    file_put_contents('log.json', json_encode([
+        'last_error' => error_get_last(),
+        'json_last_error' => json_last_error(),
+        'json_last_error_msg' => json_last_error_msg(),
+        'custom' => $custom
+    ]));
+}
